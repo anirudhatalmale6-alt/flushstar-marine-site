@@ -55,8 +55,10 @@ STEP 4 — UPLOAD
 2. Delete the old website files. Leave alone anything that is not the website,
    especially .well-known, cgi-bin, and any mail folders.
 3. Upload flushstar-site.zip, then right-click it and choose Extract.
-4. The extract creates a folder. Open it, select everything inside, and Move it
-   up one level into public_html. Then delete the empty folder and the zip.
+   The files land straight into public_html. There is no extra folder to open
+   and nothing to move.
+4. Delete two things you do not want on a live website: flushstar-site.zip, and
+   this file, SETUP-GODADDY.txt.
 
 public_html should end up containing:
   index.html   about.html   dealer-apply.php   style.css   og-image.jpg
