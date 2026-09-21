@@ -1,0 +1,203 @@
+/* FlushStar admin — same palette and type as the public site. */
+:root{
+  --abyss:#04070D; --hull:#080D17; --steel:#0E1523; --steel-2:#141D2E;
+  --line:rgba(126,166,222,.14); --ice:#EAF2FF; --mute:#8DA4C4; --mute-2:#61748F;
+  --volt:#2E9BFF; --volt-hot:#6FCBFF; --good:#39C07C; --rust:#C4562F; --brass:#D2A93F;
+  --r:4px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:var(--abyss);color:var(--ice);
+  font-family:'Barlow',system-ui,-apple-system,sans-serif;
+  background-image:
+    linear-gradient(rgba(126,166,222,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(126,166,222,.03) 1px,transparent 1px);
+  background-size:34px 34px;
+  min-height:100vh;
+}
+h2,h3{font-family:'Saira Condensed','Arial Narrow',sans-serif;letter-spacing:.05em;text-transform:uppercase;font-weight:700}
+.mono,.kpi b,td.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+
+/* login ------------------------------------------------------------- */
+.login-body{display:grid;place-items:center;padding:24px}
+.login-card{
+  width:100%;max-width:370px;background:var(--steel);
+  border:1px solid var(--line);border-radius:var(--r);padding:28px 24px;
+  display:flex;flex-direction:column;gap:14px;
+}
+.login-logo{width:150px;align-self:center}
+.login-eyebrow{
+  align-self:center;font:600 10.5px/1 'IBM Plex Mono',monospace;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--volt);margin-bottom:4px;
+}
+label{display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--mute)}
+input[type=text],input[type=password]{
+  background:var(--abyss);border:1px solid var(--line);border-radius:var(--r);
+  color:var(--ice);padding:11px 12px;font:inherit;font-size:15px;
+}
+input:focus{outline:none;border-color:var(--volt)}
+.form-error{background:rgba(196,86,47,.12);border:1px solid rgba(196,86,47,.45);
+  border-radius:var(--r);padding:10px 12px;font-size:13.5px;color:#F5C3B0}
+.form-ok{background:rgba(57,192,124,.1);border:1px solid rgba(57,192,124,.4);
+  border-radius:var(--r);padding:12px 13px;font-size:13.5px;line-height:1.6;color:#BFEBD4}
+
+.btn{
+  display:block;width:100%;text-align:center;text-decoration:none;
+  border:0;border-radius:var(--r);cursor:pointer;padding:13px;
+  font-family:'Saira Condensed','Arial Narrow',sans-serif;font-weight:700;
+  font-size:15px;letter-spacing:.08em;text-transform:uppercase;
+}
+.btn-primary{background:var(--volt);color:#031324}
+.btn-ghost{background:transparent;color:var(--mute);border:1px solid var(--line)}
+.btn-sm{width:auto;display:inline-block;padding:7px 12px;font-size:12px}
+
+/* shell ------------------------------------------------------------- */
+.bar{
+  display:flex;align-items:center;gap:14px;padding:12px 20px;
+  border-bottom:1px solid var(--line);background:rgba(8,13,23,.92);
+  position:sticky;top:0;z-index:10;
+}
+.bar-logo{width:104px}
+.bar-title{font-family:'Saira Condensed','Arial Narrow',sans-serif;letter-spacing:.09em;text-transform:uppercase;font-size:16px}
+.bar-user{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:12.5px;color:var(--mute-2)}
+.wrap{max-width:1080px;margin:0 auto;padding:22px 18px 60px;display:flex;flex-direction:column;gap:16px}
+
+.range{display:flex;gap:7px;flex-wrap:wrap}
+.range a{
+  text-decoration:none;color:var(--mute);border:1px solid var(--line);
+  border-radius:var(--r);padding:7px 13px;font-size:12.5px;
+}
+.range a.on{border-color:var(--volt);color:var(--volt);background:rgba(46,155,255,.08)}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.kpi{border:1px solid var(--line);border-radius:var(--r);background:var(--steel);padding:15px 16px}
+.kpi span{display:block;font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.15em;text-transform:uppercase;color:var(--mute-2)}
+.kpi b{display:block;margin-top:8px;font-size:30px;line-height:1;letter-spacing:.02em}
+
+.card{border:1px solid var(--line);border-radius:var(--r);background:var(--steel);padding:17px 18px}
+.card h2{font-size:15px;margin-bottom:13px}
+.card h3{font-size:12.5px;color:var(--mute);margin:16px 0 9px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:780px){.cols{grid-template-columns:1fr}}
+
+.empty{color:var(--mute-2);font-size:13px;line-height:1.6}
+.note{color:var(--mute-2);font-size:11.5px;line-height:1.6;margin-top:12px}
+
+/* chart ------------------------------------------------------------- */
+.chart{display:flex;align-items:flex-end;gap:3px;height:160px;overflow-x:auto;padding-top:6px}
+.bar-col{flex:1;min-width:13px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:6px}
+.bar-fill{
+  width:100%;background:linear-gradient(180deg,var(--volt-hot),var(--volt));
+  border-radius:2px 2px 0 0;min-height:2px;
+}
+.bar-col small{font:500 9px/1 'IBM Plex Mono',monospace;color:var(--mute-2);white-space:nowrap;height:11px;overflow:visible}
+
+/* tables ------------------------------------------------------------ */
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{
+  text-align:left;font:600 9.5px/1 'IBM Plex Mono',monospace;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--mute-2);padding:0 8px 9px 0;border-bottom:1px solid var(--line);
+}
+th:not(:first-child),td:not(:first-child){text-align:right}
+td{padding:9px 8px 9px 0;border-bottom:1px solid rgba(126,166,222,.07);color:var(--mute)}
+tr:last-child td{border-bottom:0}
+td:first-child{color:var(--ice)}
+.scroll{max-height:420px;overflow-y:auto}
+
+/* meters / chips ---------------------------------------------------- */
+.meter{margin-bottom:11px}
+.meter-top{display:flex;justify-content:space-between;font-size:13px;color:var(--mute);margin-bottom:5px}
+.meter-top b{color:var(--ice)}
+.meter-rail{height:6px;background:var(--steel-2);border-radius:3px;overflow:hidden}
+.meter-rail span{display:block;height:100%;background:linear-gradient(90deg,var(--volt),var(--volt-hot))}
+
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:7px}
+.chips li{
+  border:1px solid var(--line);border-radius:var(--r);padding:6px 10px;
+  font-size:12.5px;color:var(--mute);
+}
+.chips b{color:var(--volt-hot);margin-left:5px}
+
+/* ── dealer portal admin: nav, forms, editable tables ─────────────── */
+.portnav{
+  display:flex;gap:2px;padding:0 20px;border-bottom:1px solid var(--line);
+  background:rgba(8,13,23,.6);overflow-x:auto;position:sticky;top:53px;z-index:9;
+}
+.portnav a{
+  text-decoration:none;color:var(--mute);padding:12px 15px;white-space:nowrap;
+  font-size:13.5px;border-bottom:2px solid transparent;margin-bottom:-1px;
+  display:flex;align-items:center;gap:7px;
+}
+.portnav a.on{color:var(--volt);border-bottom-color:var(--volt)}
+.badge{
+  background:var(--volt);color:#031324;border-radius:100px;
+  font:700 10px/1 'IBM Plex Mono',monospace;padding:4px 7px;min-width:19px;text-align:center;
+}
+
+a{color:var(--volt)}
+a:hover{color:var(--volt-hot)}
+.dim{color:var(--mute-2)}
+.pagehead h2{font-size:22px;display:flex;align-items:center;gap:11px;flex-wrap:wrap}
+.pagehead .sub{color:var(--mute);font-size:13.5px;line-height:1.7;margin-top:7px}
+.pre{white-space:pre-wrap;color:var(--mute);font-size:13.5px;line-height:1.6}
+.center{text-align:center}
+
+input[type=email],input[type=number],input[type=tel],textarea,select{
+  background:var(--abyss);border:1px solid var(--line);border-radius:var(--r);
+  color:var(--ice);padding:11px 12px;font:inherit;font-size:15px;width:100%;
+}
+textarea{resize:vertical;line-height:1.5}
+textarea:focus,select:focus{outline:none;border-color:var(--volt)}
+label{margin-bottom:13px}
+label small{color:var(--mute-2);font-size:11px}
+.field-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:0 14px}
+.btn-wide{max-width:340px;margin:4px auto 0}
+
+.switch{flex-direction:row;align-items:center;gap:10px;cursor:pointer;font-size:14px;color:var(--ice)}
+.switch input{width:18px;height:18px;accent-color:var(--volt);flex:none}
+
+/* status pills */
+.pill{
+  display:inline-block;border-radius:100px;padding:4px 11px;
+  font:600 10px/1.4 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--line);color:var(--mute);
+}
+.pill-new      {border-color:rgba(46,155,255,.5);color:var(--volt-hot);background:rgba(46,155,255,.1)}
+.pill-confirmed{border-color:rgba(210,169,63,.5);color:var(--brass);background:rgba(210,169,63,.1)}
+.pill-invoiced {border-color:rgba(210,169,63,.5);color:var(--brass);background:rgba(210,169,63,.1)}
+.pill-shipped  {border-color:rgba(57,192,124,.5);color:var(--good);background:rgba(57,192,124,.1)}
+.pill-cancelled{border-color:rgba(196,86,47,.5);color:#E7A48C;background:rgba(196,86,47,.1)}
+
+td b{display:block;color:var(--ice);font-weight:600}
+td small{display:block;color:var(--mute-2);font-size:11.5px;line-height:1.6;margin-top:2px}
+tfoot td{
+  border-top:1px solid var(--line);border-bottom:0;padding-top:13px;color:var(--ice);
+  font-family:'Saira Condensed','Arial Narrow',sans-serif;letter-spacing:.06em;
+  text-transform:uppercase;font-size:15px;
+}
+th.num,td.num{text-align:right}
+.rowacts{white-space:nowrap}
+.rowacts form{display:inline-block;margin-left:6px}
+
+/* dealer applications */
+.appcard{
+  display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;
+  border:1px solid var(--line);border-radius:var(--r);background:var(--abyss);
+  padding:14px 15px;margin-bottom:11px;
+}
+.appcard > div:first-child{flex:1;min-width:230px}
+.appcard b{font-size:15.5px;color:var(--ice)}
+.appcard .pre{margin-top:9px;font-size:13px}
+.appcard-act{display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.appcard-act form{margin:0}
+.appcard-act .btn{width:100%}
+
+/* editable product table */
+.edit-table input[type=text],.edit-table input[type=number]{padding:8px 9px;font-size:13.5px}
+.edit-table td{vertical-align:top;padding-right:9px}
+.edit-table .sub-input{margin-top:6px;font-size:12.5px;color:var(--mute)}
+.edit-table .w-sku{width:120px}
+.edit-table .w-unit{width:78px}
+.edit-table .w-price{width:96px;text-align:right}
+.edit-table .w-sort{width:68px;text-align:right}
+.edit-table input[type=checkbox]{width:18px;height:18px;accent-color:var(--volt)}

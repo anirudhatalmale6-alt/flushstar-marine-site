@@ -1,0 +1,195 @@
+FLUSHSTAR WEBSITE + ADMIN PANEL — SETUP ON GODADDY
+==================================================
+
+This is the website plus a visitor tracking system and an admin panel to view
+it. Everything runs on your own GoDaddy hosting. No other service, no monthly
+fee, nothing sending your visitors' data to anyone else.
+
+It needs a Linux / cPanel hosting plan, which gives you PHP and MySQL. That is
+GoDaddy's normal "Web Hosting". It will NOT work on Website Builder, which
+cannot run this kind of code. If you are unsure, open your hosting dashboard —
+if you can see cPanel, you are fine.
+
+
+──────────────────────────────────────────────────────────────────
+STEP 1 — BACK UP WHAT IS THERE NOW
+──────────────────────────────────────────────────────────────────
+In File Manager, open public_html, select everything, Compress to a zip, and
+download it. Do not skip this. It is how you undo everything in two minutes.
+
+
+──────────────────────────────────────────────────────────────────
+STEP 2 — MAKE THE DATABASE
+──────────────────────────────────────────────────────────────────
+In cPanel, open "MySQL Database Wizard".
+
+  1. Database name: flushstar          → Next Step
+  2. Username: fsadmin
+     Password: use the Generate button, and COPY IT SOMEWHERE FIRST
+                                         → Create User
+  3. Tick "ALL PRIVILEGES"              → Next Step
+
+GoDaddy adds your account name to the front of both, so you will end up with
+something like "abc123_flushstar" and "abc123_fsadmin". Write down all three:
+the full database name, the full username, and the password.
+
+
+──────────────────────────────────────────────────────────────────
+STEP 3 — FILL IN THE SETTINGS FILE
+──────────────────────────────────────────────────────────────────
+Open admin/config.php on your computer in Notepad or TextEdit. Replace the
+four REPLACE_WITH_... values:
+
+  db_name  the full database name from step 2
+  db_user  the full username from step 2
+  db_pass  the password from step 2
+  salt     any long line of random letters and numbers you make up
+
+Leave db_host as 'localhost'. Save the file.
+
+
+──────────────────────────────────────────────────────────────────
+STEP 4 — UPLOAD
+──────────────────────────────────────────────────────────────────
+1. In File Manager, go into public_html.
+2. Delete the old website files. Leave alone anything that is not the website,
+   especially .well-known, cgi-bin, and any mail folders.
+3. Upload flushstar-site.zip, then right-click it and choose Extract.
+4. The extract creates a folder. Open it, select everything inside, and Move it
+   up one level into public_html. Then delete the empty folder and the zip.
+
+public_html should end up containing:
+  index.html   about.html   dealer-apply.php   style.css   og-image.jpg
+  track.php    img/         admin/             dealer/
+
+
+──────────────────────────────────────────────────────────────────
+STEP 5 — CREATE YOUR LOGIN
+──────────────────────────────────────────────────────────────────
+In a browser go to:
+
+  https://www.flushstarmarine.com/admin/setup.php
+
+It builds the database tables and asks you to pick a username and password.
+Use a real password, at least 10 characters — this page is on the open
+internet.
+
+If it says "Database connection failed", the details in config.php do not match
+step 2. That is the only thing that error means.
+
+
+──────────────────────────────────────────────────────────────────
+STEP 6 — DELETE THE SETUP FILE
+──────────────────────────────────────────────────────────────────
+Back in File Manager, delete admin/setup.php.
+
+It refuses to create a second account once one exists, so it is not a hole, but
+there is no reason to leave it lying around.
+
+
+──────────────────────────────────────────────────────────────────
+DONE — USING IT
+──────────────────────────────────────────────────────────────────
+  https://www.flushstarmarine.com/admin/
+
+Sign in with what you created. You get:
+
+  Visitors and page views, for today / 7 / 30 / 90 days
+  A traffic chart by day
+  Where people came from — Google, Facebook, Boat Trader, direct, and so on
+  Which pages they looked at
+  Phone versus desktop, and which browsers
+  A live list of recent visits
+
+There are four tabs across the top: Visitors, Orders, Dealers and Products.
+The last three are the dealer portal, covered below.
+
+Visit the site yourself in another browser and refresh the panel — you will see
+yourself appear.
+
+
+──────────────────────────────────────────────────────────────────
+A NOTE ON PRIVACY, BECAUSE IT MATTERS FOR A BUSINESS SITE
+──────────────────────────────────────────────────────────────────
+This does NOT store IP addresses. The address is scrambled together with your
+salt and the date into an anonymous daily id, which is enough to count unique
+visitors and cannot be turned back into an address or a person.
+
+That is a deliberate choice. It keeps the numbers useful while meaning you are
+not holding personal data you would then be responsible for. It also means the
+panel cannot tell you WHO an individual visitor is — only how many, from where,
+on what. If someone ever asks for named visitors, that is a different thing
+entirely and worth talking about first.
+
+Known bots and crawlers are ignored, so the numbers are real people.
+
+
+────
+
+
+───────────────────────────────────────────────────────────────
+THE DEALER PORTAL
+───────────────────────────────────────────────────────────────
+Boat dealers sign in and send you orders. No card is taken and nothing is
+charged — an order arrives, you confirm it, and you invoice the way you do now.
+It installs with the rest of the site. There is nothing extra to set up.
+
+PRICES ARE OFF TO START WITH
+  You asked to hold prices back, so the portal ships with them hidden. Dealers
+  send quantities only. When you are ready, go to Products, tick "Dealers can
+  see prices and order totals", and fill the price column in. If you turn
+  prices on while some products have no price, the panel tells you which.
+
+HOW A DEALER GETS AN ACCOUNT
+  1. They find www.flushstarmarine.com/dealer-apply.php and apply. It appears
+     in your admin panel under Dealers with a blue number on the tab.
+  2. You press "Set up account". Their details are already filled in; you pick
+     the username they will sign in with.
+  3. The panel shows a temporary password ONCE. Read it to them over the phone.
+     It is not stored anywhere readable — not even you can look it up later.
+  4. On their first sign-in they must choose their own password before they can
+     do anything else.
+
+  You can also create an account directly, without an application. Same form.
+
+WHEN AN ORDER COMES IN
+  The Orders tab shows a count of new ones. Open an order and you get the
+  dealer, their phone, what they want, where to ship it and any note. Set the
+  status — Confirmed, Invoiced, Shipped or Cancelled — and you can type a
+  message the dealer sees on their own order page.
+
+  Nothing is emailed. Changing a status does not notify anybody. The dealer
+  sees it next time they look. Call or invoice as you normally would.
+
+IF A DEALER FORGETS THEIR PASSWORD
+  Dealers tab, "Reset password" on their row. You get a new temporary password
+  to read out. Their old one stops working immediately.
+
+IF YOU STOP DEALING WITH SOMEONE
+  "Disable" on their row. They cannot sign in, and if they are signed in at the
+  time they are thrown out on their next click. Their order history is kept.
+
+SIX WRONG PASSWORDS AND THEY ARE LOCKED OUT
+  For fifteen minutes. Resetting their password clears it straight away.
+
+WHAT THE PORTAL DOES NOT DO
+  It does not take payment, calculate tax or freight, check stock, or send
+  email. Those were all deliberate — say the word and any of them can be added.
+
+
+──────────────────────────────────────────────────────────────
+IF SOMETHING GOES WRONG
+──────────────────────────────────────────────────────────────────
+Page loads but the panel shows zeros
+  Visit the public site first — the counter only records the public pages, not
+  the admin panel. Your own admin visits are deliberately not counted.
+
+"Database connection failed"
+  config.php does not match the database you made in step 2. Check for the
+  account prefix on both the database name and the username.
+
+Old site still showing
+  Hard refresh (Ctrl+Shift+R / Cmd+Shift+R), and check there is no leftover
+  index.php or index.htm in public_html — Apache serves those before index.html.
+
+Anything else, send me a screenshot and I will tell you exactly what to click.

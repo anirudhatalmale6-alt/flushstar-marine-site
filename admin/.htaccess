@@ -1,0 +1,18 @@
+# Nothing in here should ever be fetched as a plain file. PHP still runs
+# normally; this only stops the likes of config.php being downloaded if PHP
+# were ever misconfigured, and hides dotfiles.
+<FilesMatch "\.(php)$">
+  Require all granted
+</FilesMatch>
+
+<FilesMatch "^(config\.php|db\.php|auth\.php|_nav\.php)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+Options -Indexes
