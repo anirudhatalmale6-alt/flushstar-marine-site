@@ -85,7 +85,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Become a Dealer | FlushStar Marine Systems</title>
 <meta name="description" content="Apply for a FlushStar trade account. Order the Quantum 25 and service parts on account, online.">
-<link rel="icon" href="img/logo.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/icon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/icon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/icon-180.png">
 <link rel="canonical" href="https://www.flushstarmarine.com/dealer-apply.php">
 <meta name="theme-color" content="#04070D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -158,24 +161,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="apply-grid">
       <label>Company
         <input type="text" name="company" maxlength="120" required
+               autocomplete="organization" placeholder="e.g. Bayside Marine Center"
                value="<?= h((string) ($_POST['company'] ?? '')) ?>">
       </label>
       <label>Your name
         <input type="text" name="contact_name" maxlength="120" required
+               autocomplete="name" placeholder="First and last name"
                value="<?= h((string) ($_POST['contact_name'] ?? '')) ?>">
       </label>
       <label>Email
         <input type="email" name="email" maxlength="160" required
+               autocomplete="email" inputmode="email" placeholder="you@company.com"
                value="<?= h((string) ($_POST['email'] ?? '')) ?>">
       </label>
       <label>Phone
         <input type="tel" name="phone" maxlength="40" required
+               autocomplete="tel" inputmode="tel" placeholder="(850) 555-0100"
                value="<?= h((string) ($_POST['phone'] ?? '')) ?>">
       </label>
     </div>
 
     <label>Where are you based <small>city and state</small>
       <input type="text" name="location" maxlength="120"
+             autocomplete="address-level2" placeholder="City and state"
              value="<?= h((string) ($_POST['location'] ?? '')) ?>">
     </label>
 

@@ -4,8 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>FlushStar Marine Systems | Automatic Outboard Flushing System</title>
-<meta name="description" content="The Quantum 25 clears salt, sand and mineral buildup from your outboard's full cooling circuit in one push-button cycle. Flushes 1 to 6 engines. No engine operation. Made in the U.S.A. since 1988.">
-<link rel="icon" href="img/logo.png">
+<meta name="description" content="Outboard engine flushing system. One push-button cycle clears salt from the cooling circuit of up to 6 engines. No engine run time. Made in the U.S.A.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/img/icon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/img/icon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/img/icon-180.png">
 
 <link rel="canonical" href="https://www.flushstarmarine.com/">
 
@@ -192,7 +195,7 @@
 <section class="stats">
   <div class="wrap">
     <div class="stat-grid stagger rv">
-      <div class="stat"><b data-count="38" data-suffix="">0</b><small>Years building flush systems</small></div>
+      <div class="stat"><b data-count="38" data-since="1988" data-suffix="">0</b><small>Years building flush systems</small></div>
       <div class="stat"><b data-count="6" data-suffix="">0</b><small>Engines on one cycle</small></div>
       <div class="stat"><b data-count="1" data-suffix="">0</b><small>Button to start it</small></div>
       <div class="stat"><b data-count="0" data-suffix="">0</b><small>Emissions or fuel burned</small></div>
@@ -531,6 +534,13 @@ document.querySelectorAll('.feat').forEach(function(f){
     f.style.setProperty('--mx',(e.clientX-r.left)+'px');
     f.style.setProperty('--my',(e.clientY-r.top)+'px');
   });
+});
+
+/* Any counter carrying data-since works its own value out from the current
+   year, so "38 years" rolls over to 39 in January without anyone editing a file. */
+[].forEach.call(document.querySelectorAll('[data-since]'),function(el){
+  var since=+el.getAttribute('data-since');
+  if(since) el.setAttribute('data-count', String(new Date().getFullYear()-since));
 });
 
 /* ---- engine configurator ----
