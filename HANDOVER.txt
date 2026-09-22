@@ -1,0 +1,155 @@
+FLUSHSTAR MARINE SYSTEMS — WEBSITE HANDOVER
+Prepared 22 September 2026
+
+
+──────────────────────────────────────────────────────────────────────
+1. ADDRESSES
+──────────────────────────────────────────────────────────────────────
+Public website        https://www.flushstarmarine.com
+Become a Dealer       https://www.flushstarmarine.com/dealer-apply.php
+Dealer sign-in        https://www.flushstarmarine.com/dealer/
+Admin panel           https://www.flushstarmarine.com/admin/
+
+Both www and the bare domain work. Anyone typing http is sent to https
+automatically, so everybody gets the padlock.
+
+
+──────────────────────────────────────────────────────────────────────
+2. WHAT SITS WHERE, AND WHAT IT COSTS
+──────────────────────────────────────────────────────────────────────
+Domain name       GoDaddy      $22.99/yr, renews 3 December 2027
+Web hosting       GoDaddy      $14.99/mo, renews 21 October 2026
+                               Economy plan, cPanel
+DNS + certificate Cloudflare   free, permanently
+Email             Google       unchanged, nothing was touched
+
+The certificate renews itself. Nobody has to remember it.
+
+WORTH KNOWING: the hosting is on a monthly plan, which is the expensive
+way. A 12 or 36 month term costs roughly half per month. Changing it is
+done in the GoDaddy account under renewal settings.
+
+
+──────────────────────────────────────────────────────────────────────
+3. THE ADMIN PANEL
+──────────────────────────────────────────────────────────────────────
+Sign in at /admin/ — four tabs across the top.
+
+VISITORS   How many people came, which pages they read, where they came
+           from (Google, Facebook, direct), phone versus desktop, and a
+           live list of recent visits. Today / 7 / 30 / 90 days.
+
+           No IP addresses are stored. Visitors are counted using an
+           anonymous daily code, so the numbers are useful but nobody
+           is holding personal data. Known bots are ignored.
+
+ORDERS     Every order dealers send. A blue number appears on the tab
+           when new ones arrive. Open an order to see the dealer, their
+           phone, what they want, where it ships and any note. Set the
+           status and leave a message the dealer sees on their own page.
+
+DEALERS    Trade accounts, and applications waiting to be approved.
+
+PRODUCTS   The item list dealers order from, and the price switch.
+
+
+──────────────────────────────────────────────────────────────────────
+4. HOW THE DEALER PORTAL WORKS
+──────────────────────────────────────────────────────────────────────
+1. A boat dealer finds the site and fills in Become a Dealer.
+2. Their application appears in the Dealers tab with a blue number.
+3. You press "Set up account". Their details are already filled in;
+   you choose the username.
+4. The panel shows a temporary password ONCE. Read it to them by
+   phone. It is stored scrambled — nobody can look it up later.
+5. First time they sign in they must choose their own password before
+   they can do anything else.
+6. They order by typing quantities. It lands in your Orders tab.
+
+NOTHING IS CHARGED AND NO CARD IS TAKEN. An order is a request. You
+confirm it and invoice exactly as you do now.
+
+
+──────────────────────────────────────────────────────────────────────
+5. EVERYDAY JOBS
+──────────────────────────────────────────────────────────────────────
+New dealer            Dealers tab, "Set up account"
+Forgotten password    Dealers tab, "Reset password" on their row.
+                      Read out the new one. Their old one stops working.
+Stop dealing with one Dealers tab, "Disable". They cannot sign in, and
+                      if signed in they are thrown out on the next click.
+                      Their order history is kept.
+Add or edit products  Products tab. Change names, descriptions, add new
+                      items, or untick Live to hide one.
+Turn prices on        Products tab, tick "Dealers can see prices", then
+                      fill in the price column. The panel warns you if
+                      any live product has no price.
+
+Six wrong passwords locks a dealer out for fifteen minutes. Resetting
+their password clears it immediately.
+
+
+──────────────────────────────────────────────────────────────────────
+6. WHAT THE SITE DELIBERATELY DOES NOT DO
+──────────────────────────────────────────────────────────────────────
+No card payments. No tax or freight calculation. No stock levels.
+No emails are sent by the website at all.
+
+That last one is deliberate: shared hosting email fails silently, and a
+trade enquiry vanishing is worse than a tab you check. Dealer
+applications and order status changes appear in the panel, not an inbox.
+
+Any of these can be added later.
+
+
+──────────────────────────────────────────────────────────────────────
+7. STILL RECOMMENDED
+──────────────────────────────────────────────────────────────────────
+a) ORIGIN CERTIFICATE — do before handing out dealer logins.
+   The connection between Cloudflare and the web server is currently
+   unencrypted on its last leg. Fine for public pages, not ideal for a
+   page where dealers type passwords. Fixed with a free Cloudflare
+   certificate installed on the server. Ten minutes, no cost.
+
+b) SPF RECORD — fixes business email landing in spam.
+   Their domain tells the world to spam-folder unauthenticated mail,
+   then omits one of the two authentication records. Add this in
+   Cloudflare DNS:
+
+        Type: TXT
+        Name: @
+        Value: v=spf1 include:_spf.google.com ~all
+
+   Also worth checking DKIM signing is switched on inside their Google
+   admin console — the record exists but may never have been activated.
+
+c) HOSTING TERM — move from monthly to annual and roughly halve it.
+
+d) WIX — leave it running about a week as a fallback, then cancel.
+
+
+──────────────────────────────────────────────────────────────────────
+8. IF SOMETHING GOES WRONG
+──────────────────────────────────────────────────────────────────────
+To put the old Wix site back, in Cloudflare DNS:
+
+    A record   flushstarmarine.com  ->  185.230.63.107   (grey cloud)
+    CNAME      www                  ->  pointing.wixdns.net (grey cloud)
+
+That reverses everything in about five minutes. Do not change the MX or
+any TXT record — those are the email and must stay exactly as they are.
+
+The website code is kept at:
+    https://github.com/anirudhatalmale6-alt/flushstar-marine-site
+
+
+──────────────────────────────────────────────────────────────────────
+9. ACCOUNTS NEEDED TO RUN THIS
+──────────────────────────────────────────────────────────────────────
+GoDaddy      domain and hosting
+Cloudflare   DNS and the certificate
+Admin panel  the username created during setup
+Google       their existing email, untouched
+
+Keep all four. Losing the Cloudflare account would take the site
+offline, since that is where the domain now points.
