@@ -172,8 +172,16 @@ section{padding:104px 0;position:relative}
 .hose{fill:none;stroke:rgba(126,166,222,.2);stroke-width:3.4;stroke-linecap:round}
 .hose.on{stroke:url(#flowgrad);stroke-dasharray:9 11;animation:flow 1.05s linear infinite}
 @keyframes flow{to{stroke-dashoffset:-20}}
+/* The unit flushes one engine at a time, so a running cycle shows three
+   states: flushing now (.on, animated), already finished (.done, steady
+   green), and still waiting its turn (.queued, dim). */
+.hose.done{stroke:rgba(57,192,124,.55)}
+.hose.queued{stroke:rgba(126,166,222,.18)}
 .eng{fill:#0A1120;stroke:rgba(126,166,222,.22);stroke-width:1.2}
 .eng.on{stroke:var(--volt);fill:rgba(46,155,255,.09)}
+.eng.active{stroke:var(--volt-hot);stroke-width:2;fill:rgba(46,155,255,.18);
+  filter:drop-shadow(0 0 9px rgba(46,155,255,.55))}
+.eng.done{stroke:rgba(57,192,124,.6);fill:rgba(57,192,124,.08)}
 
 /* ---------- features ---------- */
 .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);

@@ -533,8 +533,12 @@ document.querySelectorAll('.feat').forEach(function(f){
   });
 });
 
-/* ---- engine configurator ---- */
-var MAX=6, count=4, running=false;
+/* ---- engine configurator ----
+   The Quantum 25 works through the engine bank one at a time, so the diagram
+   does too: the engine being flushed animates, the ones already done stay lit,
+   the rest wait their turn. Flushing everything at once was wrong. */
+var MAX=6, count=4, running=false, activeIdx=-1, doneCount=0;
+var SECS_PER_ENGINE=2;
 var portsG=document.getElementById('ports'),
     hosesG=document.getElementById('hoses'),
     engG=document.getElementById('engines'),
@@ -556,14 +560,19 @@ function buildDiagram(){
     var lb=el('text',{x:56,y:y+4,'class':'port-label'+(on?' on':'')});
     lb.textContent='ENG '+(i+1);
     portsG.appendChild(lb);
-    // hose
+    // hose — three states while running: flushing now, already done, waiting
     var ey=44+i*44+16;
+    var state='';
+    if(on&&running){ state = (i===activeIdx) ? ' on' : (i<activeIdx ? ' done' : ' queued'); }
     var h=el('path',{d:'M148 '+y+' C 210 '+y+', 250 '+ey+', 312 '+ey,
-      'class':'hose'+(on&&running?' on':'')});
+      'class':'hose'+state});
     if(on&&!running)h.setAttribute('stroke','rgba(46,155,255,.45)');
     hosesG.appendChild(h);
     // engine block
-    var g=el('rect',{x:312,y:ey-15,width:126,height:30,rx:4,'class':'eng'+(on?' on':'')});
+    var estate = on ? ' on' : '';
+    if(on&&running&&i===activeIdx) estate += ' active';
+    if(on&&running&&i<activeIdx)  estate += ' done';
+    var g=el('rect',{x:312,y:ey-15,width:126,height:30,rx:4,'class':'eng'+estate});
     engG.appendChild(g);
     var t=el('text',{x:322,y:ey+4,'class':'port-label'+(on?' on':'')});
     t.textContent='OUTBOARD '+(i+1);
@@ -585,7 +594,7 @@ function buildDial(){
 }
 
 function setCount(n){
-  count=n;running=false;
+  count=n;running=false;activeIdx=-1;doneCount=0;clearInterval(timer);
   [].forEach.call(dial.children,function(b){
     b.setAttribute('aria-pressed',(+b.dataset.n===n)?'true':'false');});
   document.getElementById('rEng').textContent=n;
@@ -599,21 +608,32 @@ function setCount(n){
 var timer=null;
 document.getElementById('runBtn').addEventListener('click',function(){
   if(running){return;}
-  running=true;buildDiagram();
+  running=true;activeIdx=0;doneCount=0;
   var btn=this,secs=0;
   btn.textContent='Cycle running…';
   document.getElementById('statusText').textContent='Flushing';
+  buildDiagram();
+  document.getElementById('rStatus').textContent='Engine 1 of '+count;
   clearInterval(timer);
   timer=setInterval(function(){
     secs++;
-    document.getElementById('rStatus').textContent='Running  '+
-      String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');
-    if(secs>=8){
-      clearInterval(timer);running=false;buildDiagram();
-      document.getElementById('rStatus').textContent='Cycle complete';
-      document.getElementById('statusText').textContent='Complete';
-      btn.textContent='Run Flush Cycle';
+    // move on to the next engine once this one has had its turn
+    var shouldBeOn=Math.floor(secs/SECS_PER_ENGINE);
+    if(shouldBeOn>activeIdx){
+      activeIdx=shouldBeOn;
+      if(activeIdx>=count){
+        clearInterval(timer);
+        running=false;activeIdx=-1;buildDiagram();
+        document.getElementById('rStatus').textContent='Cycle complete';
+        document.getElementById('statusText').textContent='Complete';
+        btn.textContent='Run Flush Cycle';
+        return;
+      }
+      buildDiagram();
     }
+    document.getElementById('rStatus').textContent=
+      'Engine '+(activeIdx+1)+' of '+count+'  ·  '+
+      String(Math.floor(secs/60)).padStart(2,'0')+':'+String(secs%60).padStart(2,'0');
   },1000);
 });
 
