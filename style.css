@@ -239,7 +239,8 @@ section{padding:104px 0;position:relative}
 
 /* ---------- footer ---------- */
 footer{background:var(--abyss);border-top:1px solid var(--line);padding:64px 0 30px}
-.f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:44px;margin-bottom:48px}
+.f-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr .8fr;gap:40px;margin-bottom:48px}
+@media(max-width:1000px){.f-grid{grid-template-columns:1fr 1fr;gap:34px}}
 footer img.flogo{height:46px;margin-bottom:20px}
 footer p{color:var(--mute);font-size:15.5px;margin:0 0 8px}
 footer h4{font-size:15px;color:var(--ice);margin-bottom:16px;letter-spacing:.08em}
@@ -449,3 +450,13 @@ h1 em::after{content:"";position:absolute;left:0;bottom:.06em;height:4px;width:0
   .kin-a,.kin-b,.flowlines path,.btn-primary::after,.cta::before,.hot::before{animation:none!important}
   h1 .w,.hero .eyebrow,.hero p.lede,.hero-cta,.spec-strip,.stagger>*{opacity:1!important;transform:none!important;animation:none!important}
 }
+
+
+/* Footer social links. Built as a list so adding Instagram or YouTube later
+   is one more <li>, not a rethink. */
+footer ul.social{list-style:none;padding:0;margin:0}
+footer ul.social li{margin-bottom:10px}
+footer ul.social a{display:inline-flex;align-items:center;gap:10px;
+  color:var(--mute);text-decoration:none;transition:color .18s}
+footer ul.social a:hover{color:var(--volt-hot)}
+footer ul.social svg{flex:none;opacity:.9}
