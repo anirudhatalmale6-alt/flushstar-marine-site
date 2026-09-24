@@ -206,6 +206,22 @@ function fs_install_dealers(PDO $pdo): void
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
     ");
 
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS enquiries (
+            id         INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+            name       VARCHAR(120) NOT NULL,
+            email      VARCHAR(160) NOT NULL,
+            phone      VARCHAR(40)  NULL,
+            company    VARCHAR(120) NULL,
+            engines    VARCHAR(20)  NULL,
+            message    TEXT         NOT NULL,
+            created_at DATETIME     NOT NULL,
+            emailed    TINYINT(1)   NOT NULL DEFAULT 0,
+            handled    TINYINT(1)   NOT NULL DEFAULT 0,
+            INDEX idx_handled (handled, created_at)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+    ");
+
     fs_seed_products($pdo);
 }
 
@@ -233,6 +249,9 @@ function fs_seed_products(PDO $pdo): void
         $st->execute($r);
     }
 }
+
+/** Where website enquiries are emailed. Changing it here changes it everywhere. */
+const FS_ENQUIRY_EMAIL = 'customercare@flushstarmarine.com';
 
 function fs_setting(PDO $pdo, string $key, string $default = ''): string
 {

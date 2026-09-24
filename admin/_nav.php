@@ -34,13 +34,15 @@ function fsa_bar(string $title): void
     // Badges on the two things that need acting on, so nothing sits unnoticed.
     $newOrders = (int) $pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'new'")->fetchColumn();
     $newApps   = (int) $pdo->query('SELECT COUNT(*) FROM dealer_applications WHERE handled = 0')->fetchColumn();
+    $newEnq    = (int) $pdo->query('SELECT COUNT(*) FROM enquiries WHERE handled = 0')->fetchColumn();
 
     $here = basename((string) ($_SERVER['SCRIPT_NAME'] ?? ''));
     $tabs = [
-        'index.php'    => ['Visitors',  0],
-        'orders.php'   => ['Orders',    $newOrders],
-        'dealers.php'  => ['Dealers',   $newApps],
-        'products.php' => ['Products',  0],
+        'index.php'     => ['Visitors',  0],
+        'enquiries.php' => ['Enquiries', $newEnq],
+        'orders.php'    => ['Orders',    $newOrders],
+        'dealers.php'   => ['Dealers',   $newApps],
+        'products.php'  => ['Products',  0],
     ];
 
     $nav = '';
@@ -56,7 +58,11 @@ function fsa_bar(string $title): void
 <header class="bar">
   <img src="../img/logo.png" alt="FlushStar" class="bar-logo">
   <span class="bar-title">{$t}</span>
-  <span class="bar-user">{$user} <a class="btn btn-ghost btn-sm" href="logout.php">Sign out</a></span>
+  <span class="bar-user">
+    <a href="account.php" style="color:var(--mute)">{$user}</a>
+    <a class="btn btn-ghost btn-sm" href="account.php">Account</a>
+    <a class="btn btn-ghost btn-sm" href="logout.php">Sign out</a>
+  </span>
 </header>
 <nav class="portnav">{$nav}</nav>
 HTML;

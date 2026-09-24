@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="about.html">About</a>
-      <a href="index.html#contact">Contact</a>
+      <a href="contact.php">Contact</a>
     </nav>
     <a class="btn btn-primary" href="dealer/login.php">Dealer Sign In</a>
   </div>

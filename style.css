@@ -30,7 +30,7 @@ body{
 }
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
-h1,h2,h3,h4{font-family:'Saira Condensed',sans-serif;font-weight:800;line-height:1.02;margin:0;text-transform:uppercase;letter-spacing:.005em}
+h1,h2,h3,h4{font-family:'Saira Condensed',sans-serif;font-weight:800;line-height:1.04;margin:0;letter-spacing:.012em}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 26px}
 .mono{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.18em;font-size:13px;font-weight:500}
 
@@ -460,3 +460,15 @@ footer ul.social a{display:inline-flex;align-items:center;gap:10px;
   color:var(--mute);text-decoration:none;transition:color .18s}
 footer ul.social a:hover{color:var(--volt-hot)}
 footer ul.social svg{flex:none;opacity:.9}
+
+
+/* Which section am I on? The owner asked for this - without it the menu gives
+   no feedback at all as you scroll. Applied by the scrollspy in index.html and
+   set directly with class="on" on the standalone pages. */
+.nav-links a{position:relative}
+.nav-links a.on{color:var(--volt-hot)}
+.nav-links a.on::after{
+  content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;
+  background:linear-gradient(90deg,var(--volt),var(--volt-hot));border-radius:2px;
+}
+@media(max-width:880px){.nav-links a.on::after{display:none}}

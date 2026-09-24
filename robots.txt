@@ -1,0 +1,11 @@
+# FlushStar Marine Systems
+
+User-agent: *
+Allow: /
+
+# Nothing useful to a search engine, and the dealer area is private.
+Disallow: /admin/
+Disallow: /dealer/
+Disallow: /track.php
+
+Sitemap: https://www.flushstarmarine.com/sitemap.xml
