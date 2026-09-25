@@ -31,10 +31,16 @@ function fsa_bar(string $title): void
     $user = h((string) ($_SESSION['admin_user'] ?? ''));
     $t    = h($title);
 
-    // Badges on the two things that need acting on, so nothing sits unnoticed.
-    $newOrders = (int) $pdo->query("SELECT COUNT(*) FROM orders WHERE status = 'new'")->fetchColumn();
-    $newApps   = (int) $pdo->query('SELECT COUNT(*) FROM dealer_applications WHERE handled = 0')->fetchColumn();
-    $newEnq    = (int) $pdo->query('SELECT COUNT(*) FROM enquiries WHERE handled = 0')->fetchColumn();
+    // Badges on the things that need acting on, so nothing sits unnoticed.
+    // Each count is guarded: a missing or unreadable table must never blank the
+    // whole panel, which is exactly what happened when `enquiries` was added.
+    $count = static function (PDO $pdo, string $sql): int {
+        try { return (int) $pdo->query($sql)->fetchColumn(); }
+        catch (Throwable $e) { return 0; }
+    };
+    $newOrders = $count($pdo, "SELECT COUNT(*) FROM orders WHERE status = 'new'");
+    $newApps   = $count($pdo, 'SELECT COUNT(*) FROM dealer_applications WHERE handled = 0');
+    $newEnq    = $count($pdo, 'SELECT COUNT(*) FROM enquiries WHERE handled = 0');
 
     $here = basename((string) ($_SERVER['SCRIPT_NAME'] ?? ''));
     $tabs = [

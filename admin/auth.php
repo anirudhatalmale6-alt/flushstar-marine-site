@@ -39,6 +39,8 @@ function fs_require_login(): void
         header('Location: login.php');
         exit;
     }
+    // An upgrade may have added tables since this database was built.
+    fs_ensure_schema(fs_db());
 }
 
 function fs_csrf_token(): string

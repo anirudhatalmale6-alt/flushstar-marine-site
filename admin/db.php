@@ -46,6 +46,32 @@ function fs_db(): PDO
     return $pdo;
 }
 
+/**
+ * Make sure the schema matches the code before anything queries it.
+ *
+ * setup.php refuses to run once an admin exists, so upgrades that add a table
+ * had no way to apply themselves — the panel simply went blank when the new
+ * code queried a table the old database did not have. This closes that hole:
+ * one cheap check per request, and a full install only if something is absent.
+ */
+function fs_ensure_schema(PDO $pdo): void
+{
+    static $done = false;
+    if ($done) {
+        return;
+    }
+    $done = true;
+    try {
+        // The newest table acts as the version marker.
+        if (!$pdo->query("SHOW TABLES LIKE 'enquiries'")->fetch()) {
+            fs_install($pdo);
+        }
+    } catch (Throwable $e) {
+        // Never let a schema check take the panel down. Individual pages
+        // degrade on their own if something really is missing.
+    }
+}
+
 /** Create the tables. Safe to run repeatedly. */
 function fs_install(PDO $pdo): void
 {
