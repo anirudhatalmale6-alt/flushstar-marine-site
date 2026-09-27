@@ -472,3 +472,13 @@ footer ul.social svg{flex:none;opacity:.9}
   background:linear-gradient(90deg,var(--volt),var(--volt-hot));border-radius:2px;
 }
 @media(max-width:880px){.nav-links a.on::after{display:none}}
+
+
+/* The three problem cards became a checklist, so the numbers are now ticks. */
+.pain h3 .tick{
+  color:var(--good);
+  -webkit-text-fill-color:var(--good);
+  background:none;
+  font-size:.85em;
+  margin-right:10px;
+}
