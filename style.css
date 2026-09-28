@@ -88,6 +88,12 @@ header{position:sticky;top:0;z-index:50;background:rgba(4,7,13,.78);backdrop-fil
   background:linear-gradient(90deg,var(--abyss) 6%,rgba(4,7,13,.9) 38%,rgba(4,7,13,.28) 72%,rgba(4,7,13,.72)),
              linear-gradient(0deg,var(--abyss),transparent 42%)}
 .hero-in{position:relative;z-index:2;padding:96px 0 122px;max-width:730px}
+/* .hero is display:flex, which makes .wrap a flex item and therefore
+   shrink-to-fit rather than the usual 1240 grid. It had been sized by whatever
+   the longest headline happened to be; when the headline got shorter the block
+   narrowed to 593px and the fourth stat dropped onto its own row. Pin it to the
+   width .hero-in actually asks for (730 + the wrap's 2x26 padding). */
+.hero .wrap{min-width:min(782px,100%)}
 .eyebrow{display:inline-flex;align-items:center;gap:11px;color:var(--volt-hot);margin-bottom:26px}
 .eyebrow::before{content:"";width:34px;height:1px;background:var(--volt)}
 h1{font-size:clamp(44px,6.6vw,86px);letter-spacing:-.012em}
