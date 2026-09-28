@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && fs_csrf_ok($_POST['csrf'] ?? null))
         $pdo->prepare('UPDATE enquiries SET handled = 0 WHERE id = ?')->execute([$id]);
         fsa_flash('Reopened.');
     }
-    header('Location: enquiries.php');
+    header('Location: inquiries.php');
     exit;
 }
 
@@ -32,7 +32,7 @@ $allCount  = (int) $pdo->query('SELECT COUNT(*) FROM enquiries')->fetchColumn();
 $notMailed = (int) $pdo->query('SELECT COUNT(*) FROM enquiries WHERE emailed = 0')->fetchColumn();
 
 $flash = fsa_flash();
-fsa_head('Enquiries');
+fsa_head('Inquiries');
 ?>
 <main class="wrap">
 
@@ -40,7 +40,7 @@ fsa_head('Enquiries');
 
   <?php if ($notMailed > 0): ?>
     <p class="form-error">
-      <?= $notMailed ?> <?= $notMailed === 1 ? 'enquiry' : 'enquiries' ?> could not be
+      <?= $notMailed ?> <?= $notMailed === 1 ? 'inquiry' : 'inquiries' ?> could not be
       emailed by the server. Nothing is lost — they are all here — but it means the
       email side is not working and somebody should look at it.
     </p>
@@ -53,7 +53,7 @@ fsa_head('Enquiries');
 
   <?php if (!$rows): ?>
     <section class="card"><p class="empty">
-      <?= $show === 'open' ? 'Nothing waiting. Everything has been dealt with.' : 'No enquiries yet.' ?>
+      <?= $show === 'open' ? 'Nothing waiting. Everything has been dealt with.' : 'No inquiries yet.' ?>
     </p></section>
   <?php endif; ?>
 
@@ -92,7 +92,7 @@ fsa_head('Enquiries');
           <?= (int) $r['handled'] === 1 ? 'Reopen' : 'Mark as dealt with' ?>
         </button>
         <a class="btn btn-ghost btn-sm" style="margin-left:6px"
-           href="mailto:<?= h($r['email']) ?>?subject=<?= rawurlencode('Re: your FlushStar enquiry') ?>">Reply by email</a>
+           href="mailto:<?= h($r['email']) ?>?subject=<?= rawurlencode('Re: your FlushStar inquiry') ?>">Reply by email</a>
       </form>
     </section>
   <?php endforeach; ?>

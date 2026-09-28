@@ -276,7 +276,7 @@ function fs_seed_products(PDO $pdo): void
     }
 }
 
-/** Where website enquiries are emailed. Changing it here changes it everywhere. */
+/** Where website inquiries are emailed. Changing it here changes it everywhere. */
 const FS_ENQUIRY_EMAIL = 'customercare@flushstarmarine.com';
 
 function fs_setting(PDO $pdo, string $key, string $default = ''): string

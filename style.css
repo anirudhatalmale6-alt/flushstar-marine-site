@@ -17,6 +17,10 @@
   --volt-deep:#0B57C4;
   --brass:#D2A93F;
   --rust:#C4562F;
+  /* Used by every check mark. It was referenced in three places and defined in
+     none, so var(--good) was invalid and the ticks silently inherited --ice and
+     rendered white. 8.6:1 on --abyss, 7.2:1 on the darkest card. */
+  --good:#39C07C;
   --r:4px;
   --maxw:1240px;
   --glow:0 0 0 1px rgba(46,155,255,.35), 0 0 28px -6px rgba(46,155,255,.55);
@@ -96,6 +100,8 @@ h1 em{font-style:normal;color:var(--volt);text-shadow:0 0 34px rgba(46,155,255,.
 .spec-strip b{display:block;font-family:'Saira Condensed',sans-serif;font-size:27px;font-weight:800;color:var(--ice);line-height:1}
 .spec-strip small{display:block;color:var(--mute-2);margin-top:7px;font-family:'IBM Plex Mono',monospace;
   font-size:12px;letter-spacing:.15em;text-transform:uppercase}
+.spec-strip .tick{color:var(--good);font-family:'Barlow',sans-serif;font-weight:700;
+  font-size:.66em;margin-right:10px;vertical-align:.12em}
 
 /* ---------- generic section ---------- */
 section{padding:104px 0;position:relative}

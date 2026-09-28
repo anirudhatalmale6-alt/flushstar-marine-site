@@ -4,7 +4,7 @@
  *
  * Applications land in the admin panel rather than an inbox — shared hosting
  * mail is unreliable enough that an application quietly failing to send is a
- * real risk, and a lost trade enquiry is worse than an extra page to check.
+ * real risk, and a lost trade inquiry is worse than an extra page to check.
  */
 
 declare(strict_types=1);
@@ -212,7 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="wrap">
     <div class="f-bot">
       <span>&copy; 2026 FlushStar Marine Systems</span>
-      <span>Made in the U.S.A. &nbsp;&middot;&nbsp; Since 1988</span>
+      <span>Made in the U.S.A.</span>
     </div>
   </div>
 </footer>

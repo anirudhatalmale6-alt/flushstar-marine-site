@@ -2,8 +2,8 @@
 /**
  * Contact / request a quote.
  *
- * Every enquiry is written to the database FIRST, then emailed. That order is
- * deliberate: shared-hosting mail fails quietly, and an enquiry that never
+ * Every inquiry is written to the database FIRST, then emailed. That order is
+ * deliberate: shared-hosting mail fails quietly, and an inquiry that never
  * arrived is a lost sale nobody knows about. The panel is the record; the
  * email is the convenience.
  */
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $recent->execute([$email]);
 
         if ((int) $recent->fetchColumn() > 0) {
-            $sent = true;                   // double-click, not a second enquiry
+            $sent = true;                   // double-click, not a second inquiry
         } else {
             $pdo->prepare(
                 'INSERT INTO enquiries
@@ -74,18 +74,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = (int) $pdo->lastInsertId();
 
             // Send FROM our own domain so SPF can vouch for it, and put the
-            // enquirer in Reply-To. Putting their address in From makes us
+            // inquirer in Reply-To. Putting their address in From makes us
             // forge their domain, which is exactly what spam filters kill.
             $host = $_SERVER['HTTP_HOST'] ?? 'flushstarmarine.com';
             $host = preg_replace('/[^a-z0-9.\-]/i', '', $host);
-            $body = "New enquiry from the website\n\n"
+            $body = "New inquiry from the website\n\n"
                   . "Name:    {$name}\n"
                   . "Email:   {$email}\n"
                   . ($phone   !== '' ? "Phone:   {$phone}\n"   : '')
                   . ($company !== '' ? "Company: {$company}\n" : '')
                   . ($engines !== '' ? "Engines: {$engines}\n" : '')
                   . "\n{$message}\n\n"
-                  . "---\nAlso saved in the admin panel as enquiry #{$id}.\n";
+                  . "---\nAlso saved in the admin panel as inquiry #{$id}.\n";
 
             $headers = implode("\r\n", [
                 'From: FlushStar Website <no-reply@' . $host . '>',
@@ -94,11 +94,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'X-Mailer: FlushStar',
             ]);
 
-            $ok = @mail(FS_ENQUIRY_EMAIL, 'Website enquiry from ' . $name, $body, $headers);
+            $ok = @mail(FS_ENQUIRY_EMAIL, 'Website inquiry from ' . $name, $body, $headers);
             if ($ok) {
                 $pdo->prepare('UPDATE enquiries SET emailed = 1 WHERE id = ?')->execute([$id]);
             }
-            // Either way the enquiry is saved, so the visitor is told it worked.
+            // Either way the inquiry is saved, so the visitor is told it worked.
             $sent = true;
         }
     }
@@ -240,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button class="btn btn-primary" type="submit" style="width:100%">Send message</button>
 
         <p class="c-note">
-          We use your details to answer your enquiry and nothing else.
+          We use your details to answer your inquiry and nothing else.
           No mailing list, no passing them on.
         </p>
       </form>
@@ -261,7 +261,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>3122 Oxmoor Industrial Blvd<br>Dothan, AL 36305<br>United States</p>
       </div>
       <div class="blk">
-        <h3>Trade enquiries</h3>
+        <h3>Trade inquiries</h3>
         <p>Selling FlushStar in your store?
            <a href="dealer-apply.php">Apply for a dealer account</a>.</p>
       </div>
@@ -276,7 +276,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="wrap">
     <div class="f-bot">
       <span>&copy; 2026 FlushStar Marine Systems</span>
-      <span>Made in the U.S.A. &nbsp;&middot;&nbsp; Since 1988</span>
+      <span>Made in the U.S.A.</span>
     </div>
   </div>
 </footer>

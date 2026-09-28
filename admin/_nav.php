@@ -45,7 +45,7 @@ function fsa_bar(string $title): void
     $here = basename((string) ($_SERVER['SCRIPT_NAME'] ?? ''));
     $tabs = [
         'index.php'     => ['Visitors',  0],
-        'enquiries.php' => ['Enquiries', $newEnq],
+        'inquiries.php' => ['Inquiries', $newEnq],
         'orders.php'    => ['Orders',    $newOrders],
         'dealers.php'   => ['Dealers',   $newApps],
         'products.php'  => ['Products',  0],
