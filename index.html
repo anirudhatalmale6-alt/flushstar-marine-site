@@ -73,16 +73,31 @@
 <!-- HERO -->
 <section class="hero" style="padding:0">
   <div class="hero-img"><img src="img/manifold.jpg" alt="FlushStar Quantum 25 manifold connected to a bank of outboard engines"></div>
-  <svg class="flowlines" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
-    <defs><linearGradient id="fl" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#2E9BFF" stop-opacity="0"/>
-      <stop offset="50%" stop-color="#6FCBFF"/>
-      <stop offset="100%" stop-color="#2E9BFF" stop-opacity="0"/></linearGradient></defs>
-    <path d="M-50 130 C 300 90, 620 210, 1250 120"/>
-    <path d="M-50 300 C 340 250, 700 380, 1250 290"/>
-    <path d="M-50 470 C 280 430, 660 560, 1250 460"/>
-    <path d="M-50 620 C 360 580, 720 700, 1250 610"/>
-    <path d="M-50 750 C 300 700, 640 820, 1250 740"/>
+  <!-- Flow arrows travelling up the hoses into the engines. The three paths are
+       traced from the hoses in the photograph behind them, so the chevrons ride
+       along the real hose runs. The viewBox matches the photo's 3:2 aspect and
+       uses "slice", which crops exactly as the image's object-fit:cover does. -->
+  <svg class="flow" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <path id="ha" d="M700,469 C767,487 835,423 902,367"/>
+      <path id="hb" d="M700,580 C830,587 960,507 1090,383"/>
+      <path id="hc" d="M700,626 C867,719 1033,600 1200,496"/>
+    </defs>
+    <g class="chev"><path d="M-11,-13 L0,0 L-11,13 M-24,-13 L-13,0 L-24,13"/><animateMotion dur="1.99s" repeatCount="indefinite" rotate="auto" begin="0s"><mpath xlink:href="#ha" href="#ha"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.14;.72;1" dur="1.99s" repeatCount="indefinite" begin="0s"/></g>
+    <g class="chev"><path d="M-11,-13 L0,0 L-11,13 M-24,-13 L-13,0 L-24,13"/><animateMotion dur="1.99s" repeatCount="indefinite" rotate="auto" begin="-1.00s"><mpath xlink:href="#ha" href="#ha"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.14;.72;1" dur="1.99s" repeatCount="indefinite" begin="-1.00s"/></g>
+
+    <g class="chev"><path d="M-11,-13 L0,0 L-11,13 M-24,-13 L-13,0 L-24,13"/><animateMotion dur="3.81s" repeatCount="indefinite" rotate="auto" begin="0s"><mpath xlink:href="#hb" href="#hb"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.14;.72;1" dur="3.81s" repeatCount="indefinite" begin="0s"/></g>
+    <g class="chev"><path d="M-11,-13 L0,0 L-11,13 M-24,-13 L-13,0 L-24,13"/><animateMotion dur="3.81s" repeatCount="indefinite" rotate="auto" begin="-0.76s"><mpath xlink:href="#hb" href="#hb"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.14;.72;1" dur="3.81s" repeatCount="indefinite" begin="-0.76s"/></g>
+    <g class="chev"><path d="M-11,-13 L0,0 L-11,13 M-24,-13 L-13,0 L-24,13"/><animateMotion dur="3.81s" repeatCount="indefinite" rotate="auto" begin="-1.52s"><mpath xlink:href="#hb" href="#hb"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.14;.72;1" dur="3.81s" repeatCount="indefinite" begin="-1.52s"/></g>
+    <g class="chev"><path d="M-11,-13 L0,0 L-11,13 M-24,-13 L-13,0 L-24,13"/><animateMotion dur="3.81s" repeatCount="indefinite" rotate="auto" begin="-2.28s"><mpath xlink:href="#hb" href="#hb"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.14;.72;1" dur="3.81s" repeatCount="indefinite" begin="-2.28s"/></g>
+    <g class="chev"><path d="M-11,-13 L0,0 L-11,13 M-24,-13 L-13,0 L-24,13"/><animateMotion dur="3.81s" repeatCount="indefinite" rotate="auto" begin="-3.04s"><mpath xlink:href="#hb" href="#hb"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.14;.72;1" dur="3.81s" repeatCount="indefinite" begin="-3.04s"/></g>
+
+    <g class="chev"><path d="M-11,-13 L0,0 L-11,13 M-24,-13 L-13,0 L-24,13"/><animateMotion dur="4.62s" repeatCount="indefinite" rotate="auto" begin="0s"><mpath xlink:href="#hc" href="#hc"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.14;.72;1" dur="4.62s" repeatCount="indefinite" begin="0s"/></g>
+    <g class="chev"><path d="M-11,-13 L0,0 L-11,13 M-24,-13 L-13,0 L-24,13"/><animateMotion dur="4.62s" repeatCount="indefinite" rotate="auto" begin="-0.77s"><mpath xlink:href="#hc" href="#hc"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.14;.72;1" dur="4.62s" repeatCount="indefinite" begin="-0.77s"/></g>
+    <g class="chev"><path d="M-11,-13 L0,0 L-11,13 M-24,-13 L-13,0 L-24,13"/><animateMotion dur="4.62s" repeatCount="indefinite" rotate="auto" begin="-1.54s"><mpath xlink:href="#hc" href="#hc"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.14;.72;1" dur="4.62s" repeatCount="indefinite" begin="-1.54s"/></g>
+    <g class="chev"><path d="M-11,-13 L0,0 L-11,13 M-24,-13 L-13,0 L-24,13"/><animateMotion dur="4.62s" repeatCount="indefinite" rotate="auto" begin="-2.31s"><mpath xlink:href="#hc" href="#hc"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.14;.72;1" dur="4.62s" repeatCount="indefinite" begin="-2.31s"/></g>
+    <g class="chev"><path d="M-11,-13 L0,0 L-11,13 M-24,-13 L-13,0 L-24,13"/><animateMotion dur="4.62s" repeatCount="indefinite" rotate="auto" begin="-3.08s"><mpath xlink:href="#hc" href="#hc"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.14;.72;1" dur="4.62s" repeatCount="indefinite" begin="-3.08s"/></g>
+    <g class="chev"><path d="M-11,-13 L0,0 L-11,13 M-24,-13 L-13,0 L-24,13"/><animateMotion dur="4.62s" repeatCount="indefinite" rotate="auto" begin="-3.85s"><mpath xlink:href="#hc" href="#hc"/></animateMotion><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.14;.72;1" dur="4.62s" repeatCount="indefinite" begin="-3.85s"/></g>
   </svg>
   <div class="wrap">
     <div class="hero-in">
@@ -98,7 +113,7 @@
         <div><b>1&ndash;6</b><small>Engines flushed</small></div>
         <div><b>12VDC</b><small>Plug &amp; play</small></div>
         <div><b>0 min</b><small>Engine run time</small></div>
-        <div><b>1988</b><small>Building since</small></div>
+        <div><b>3 yr</b><small>Limited warranty</small></div>
       </div>
     </div>
   </div>

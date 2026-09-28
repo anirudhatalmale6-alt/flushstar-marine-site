@@ -79,7 +79,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(4,7,13,.78);backdrop-fil
 .hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden;
   border-bottom:1px solid var(--line)}
 .hero-img{position:absolute;inset:0;z-index:0}
-.hero-img img{width:100%;height:100%;object-fit:cover;object-position:80% center;opacity:.6}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:center;opacity:.6}
 .hero-img::after{content:"";position:absolute;inset:0;
   background:linear-gradient(90deg,var(--abyss) 6%,rgba(4,7,13,.9) 38%,rgba(4,7,13,.28) 72%,rgba(4,7,13,.72)),
              linear-gradient(0deg,var(--abyss),transparent 42%)}
@@ -285,13 +285,14 @@ footer li a:hover{color:var(--volt-hot)}
   section{padding:72px 0}
   .hero{min-height:auto}
   .hero-in{padding:64px 0 56px}
-  .hero-img img{object-position:70% center;opacity:.4}
+  .hero-img img{object-position:center;opacity:.4}
   .feat-grid{grid-template-columns:1fr}
   .spec-strip div{flex:1 1 50%;border-right:0;padding:16px 0}
   .btn{width:100%;justify-content:center}
   .cta-row .btn,.hero-cta .btn{width:100%}
 }
 @media(prefers-reduced-motion:reduce){
+  .flow{display:none}
   *{animation:none!important;transition:none!important}
   .rv{opacity:1;transform:none}
 }
@@ -307,14 +308,19 @@ footer li a:hover{color:var(--volt-hot)}
 
 /* --- hero drama --- */
 .hero-img img{transform:scale(1.03)}
-.flowlines{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.55;mix-blend-mode:screen}
-.flowlines path{fill:none;stroke:url(#fl);stroke-width:1.4;stroke-dasharray:5 15;
-  animation:fldash 3.4s linear infinite}
-.flowlines path:nth-child(2){animation-duration:4.6s;animation-delay:-1.2s}
-.flowlines path:nth-child(3){animation-duration:2.9s;animation-delay:-.6s}
-.flowlines path:nth-child(4){animation-duration:5.2s;animation-delay:-2.1s}
-.flowlines path:nth-child(5){animation-duration:3.9s;animation-delay:-.3s}
-@keyframes fldash{to{stroke-dashoffset:-200}}
+/* Flow arrows riding the hoses in the hero photograph. The overlay has to crop
+   identically to the image beneath it, so it carries the same scale as
+   .hero-img img and relies on preserveAspectRatio="slice" to match object-fit:cover. */
+/* width/height are not optional here. An <svg> is a replaced element, so
+   inset:0 alone does NOT stretch it — it falls back to its intrinsic size
+   (viewBox ratio x the container width), which left the overlay 26px lower
+   than the photograph and the arrows floating beside the hoses. */
+.flow{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;
+  mix-blend-mode:screen;transform:scale(1.03)}
+.flow .chev path{
+  fill:none;stroke:#DCF1FF;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;
+  filter:drop-shadow(0 0 4px #9BDBFF) drop-shadow(0 0 12px #2E9BFF) drop-shadow(0 0 22px #2E9BFF);
+}
 
 /* headline word reveal */
 h1 .w{display:inline-block;opacity:0;transform:translateY(28px) rotate(2deg);
@@ -438,7 +444,7 @@ h1 em::after{content:"";position:absolute;left:0;bottom:.06em;height:4px;width:0
 
 @media(max-width:960px){
   .stat-grid{grid-template-columns:repeat(2,1fr)}
-  .flowlines{opacity:.32}
+  .flow{opacity:.5}
 }
 @media(max-width:560px){
   .cue{display:none}
@@ -447,7 +453,8 @@ h1 em::after{content:"";position:absolute;left:0;bottom:.06em;height:4px;width:0
   .stat{padding:32px 18px}
 }
 @media(prefers-reduced-motion:reduce){
-  .kin-a,.kin-b,.flowlines path,.btn-primary::after,.cta::before,.hot::before{animation:none!important}
+  .flow{display:none}
+  .kin-a,.kin-b,.btn-primary::after,.cta::before,.hot::before{animation:none!important}
   h1 .w,.hero .eyebrow,.hero p.lede,.hero-cta,.spec-strip,.stagger>*{opacity:1!important;transform:none!important;animation:none!important}
 }
 
