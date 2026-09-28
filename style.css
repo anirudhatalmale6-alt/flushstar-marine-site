@@ -379,7 +379,14 @@ h1 em::after{content:"";position:absolute;left:0;bottom:.06em;height:4px;width:0
 .kin-row{display:flex;white-space:nowrap;gap:0;padding:26px 0}
 .kin-row b{font-family:'Saira Condensed',sans-serif;font-weight:800;text-transform:uppercase;
   font-size:clamp(38px,6.4vw,84px);line-height:1;letter-spacing:-.01em;padding-right:34px;
-  color:transparent;-webkit-text-stroke:1.3px rgba(126,166,222,.34)}
+  color:transparent;
+  /* The outline was 1.3px at 34% alpha, which measures 1.83:1 against the band
+     and was unreadable on a phone. 72% lands at 4.5:1 - clearly legible but
+     still below the solid words at 7:1, so the hierarchy survives.
+     The shorthand carries a flat 2.4px for browsers without max(); the line
+     after it scales the stroke with the type where max() is supported. */
+  -webkit-text-stroke:2.4px rgba(126,166,222,.72);
+  -webkit-text-stroke-width:max(2.4px,.042em)}
 .kin-row b.kin-hot{color:var(--volt);-webkit-text-stroke:0;text-shadow:0 0 40px rgba(46,155,255,.6)}
 .kin-a{animation:kin 26s linear infinite}
 .kin-b{animation:kin 34s linear infinite reverse}
