@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=7">
 <style>
   .c-wrap{max-width:1040px;margin:0 auto;padding:44px 18px 80px}
   .c-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:start}
@@ -160,6 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <a href="index.html#how">How It Works</a>
       <a href="index.html#system">The System</a>
       <a href="index.html#specs">Specs</a>
+      <a href="warranty.html">Warranty</a>
       <a href="about.html">About</a>
       <a href="contact.php" class="on">Contact</a>
       <a href="dealer-apply.php">Dealers</a>
@@ -242,6 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="c-note">
           We use your details to answer your inquiry and nothing else.
           No mailing list, no passing them on.
+          See our <a href="privacy.html">privacy policy</a>.
         </p>
       </form>
     </div>

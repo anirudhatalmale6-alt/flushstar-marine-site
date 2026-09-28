@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=7">
 <style>
   .apply-wrap{max-width:720px;margin:0 auto;padding:44px 18px 80px}
   .apply-wrap h1{font-family:'Saira Condensed',sans-serif;font-size:clamp(30px,6vw,46px);
@@ -125,6 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <a class="logo" href="index.html"><img src="img/logo.png" alt="FlushStar Marine Systems"></a>
     <nav class="nav-links">
       <a href="index.html">Home</a>
+      <a href="warranty.html">Warranty</a>
       <a href="about.html">About</a>
       <a href="contact.php">Contact</a>
     </nav>
@@ -201,6 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <p class="apply-note">
       Already have an account? <a href="dealer/login.php">Sign in here</a>.<br>
       We use these details to set up your trade account and nothing else.
+      See our <a href="privacy.html">privacy policy</a>.
     </p>
   </form>
 

@@ -1,0 +1,19 @@
+# Send the bare domain to www so the site has one address, not two.
+# Behind Cloudflare the origin only ever sees https, so match on host alone —
+# testing HTTPS here would loop. 301 so search engines transfer the ranking.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTP_HOST} ^flushstarmarine\.com$ [NC]
+  RewriteRule ^(.*)$ https://www.flushstarmarine.com/$1 [R=301,L]
+</IfModule>
+
+# Let browsers cache assets, but never the HTML — pages must be able to change.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css                "access plus 1 year"
+  ExpiresByType application/javascript  "access plus 1 year"
+  ExpiresByType image/png               "access plus 1 year"
+  ExpiresByType image/jpeg              "access plus 1 year"
+  ExpiresByType image/svg+xml           "access plus 1 year"
+  ExpiresByType text/html               "access plus 0 seconds"
+</IfModule>
